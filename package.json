@@ -1,0 +1,19 @@
+{
+  "name": "serverless-lambda-announcer",
+  "version": "1.0.0",
+  "description": "A plugin for serverless framework that announces a deploy of a new function to a given url.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dee-me-tree-or-love/serverless-lambda-announcer.git"
+  },
+  "author": "dmitrii",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dee-me-tree-or-love/serverless-lambda-announcer/issues"
+  },
+  "homepage": "https://github.com/dee-me-tree-or-love/serverless-lambda-announcer#readme"
+}
