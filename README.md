@@ -1,9 +1,9 @@
-# serverless-lambda-announcer
+# serverless-lambda-announcer :speech_balloon: 
 A plugin for serverless framework that announces a deploy of a new function to a given url. 
 
 ## Purpose  
 This plugin allows to specify a custom hook listening for lambda deploys.  
-On deploy the announcer will announce the lambda definition to the specified hook. :speech_balloon:  
+On deploy the announcer will announce the lambda definition to the specified hook.  
 The hook should be a `POST` endpoint accepting json-encoded payload.   
 ## Installation  
 Run `npm install serverless-lambda-announcer`  
