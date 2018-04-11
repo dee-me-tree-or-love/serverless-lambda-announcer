@@ -5,6 +5,7 @@ const request = require('request');
 const LambdaInfo = require('./lib/lambda-info');
 const AnnouncerException = require('./lib/announcer-exception');
 
+/* eslint-disable require-jsdoc */
 class ServerlessPlugin {
   constructor(serverless, options) {
     this.serverless = serverless;
@@ -23,8 +24,8 @@ class ServerlessPlugin {
       method: 'post',
       body: info,
       json: true,
-      url: announcer.hook
-    }
+      url: announcer.hook,
+    };
     return new Promise((resolve, reject) => {
       request(options, (err, res) => {
         if (err) {
@@ -33,7 +34,7 @@ class ServerlessPlugin {
         }
         resolve(res);
         return;
-      })
+      });
     }
     );
   }
@@ -41,16 +42,17 @@ class ServerlessPlugin {
   resolveAnnouncerParameters(service, sls) {
     // service.custom is an array
     const announcers = service.custom
-      // find the one settings defining the announcer 
-      .filter(s => s.announcer)
+      // find the one settings defining the announcer
+      .filter((s) => s.announcer)
       // map to only these settings to be on first level of depth
-      .map(s => s.announcer);
+      .map((s) => s.announcer);
     if (announcers.length != 1) {
-      sls.cli.consoleLog('!_Number of found announcer settings is not one..._!');
+      sls.cli
+        .consoleLog('!_Number of found announcer settings is not one..._!');
       return {};
     }
     return {
-      hook: announcers[0].hook || ''
+      hook: announcers[0].hook || '',
     };
   }
 
@@ -63,9 +65,11 @@ class ServerlessPlugin {
     }
     return LambdaInfo.getLambdaInfo(sls)
       .then((info) => {
-        sls.cli.log('Gathered Lambda Info for functions:')
-        sls.cli.consoleLog(info.map((i) => { return i.name}));
-        sls.cli.log(`Announcing to: ${announcer.hook}`)
+        sls.cli.log('Gathered Lambda Info for functions:');
+        sls.cli.consoleLog(info.map((i) => {
+          return i.name;
+        }));
+        sls.cli.log(`Announcing to: ${announcer.hook}`);
         return this.announce(announcer, info);
       })
       .then((result) => {
