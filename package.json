@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/dee-me-tree-or-love/serverless-lambda-announcer/issues"
   },
-  "homepage": "https://github.com/dee-me-tree-or-love/serverless-lambda-announcer#readme"
+  "homepage": "https://github.com/dee-me-tree-or-love/serverless-lambda-announcer#readme",
+  "dependencies": {
+    "request": "^2.85.0"
+  }
 }
