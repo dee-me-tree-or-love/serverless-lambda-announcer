@@ -38,3 +38,5 @@ The body that is sent from the announcer is:
   }  
 ]
 ```  
+### Kudos  
+Some methods are borrowed from the sourcecode of the [`serverless`](https://github.com/serverless/serverless) core plugins - super-duper-mega thanks  
