@@ -11,10 +11,7 @@ class ServerlessPlugin {
     this.servicePath = this.serverless.config.servicePath || '';
 
     this.hooks = {
-      // 'before:deploy:deploy': this.debug.bind(this),
-      // 'after:deploy:deploy': this.debug.bind(this),
-      'after:aws:info:displayEndpoints': this.debug.bind(this),
-      // 'before:aws:deploy:finalize:cleanup': this.debug.bind(this),
+      'after:deploy:deploy': this.debug.bind(this),
     };
   }
 
