@@ -15,12 +15,26 @@ plugins:
   ...
 ```  
 ## Usage  
+### Configuration
 In the `serverless.yml` specify a custom parameter for the announcer:  
 ```
 custom:
   - announcer:
+      # required:
       hook: <your POST webhook>
-```    
+      # optional:
+      contract:   
+        /{function name}: <your contract> 
+```     
+**Hook**:  
+The `hook` must be an accessible `POST` url accepting json input.
+**Contract**:  
+The `contract` is an optional paramter. 
+If specified must be mapped to function name.
+Can be specified in any form. 
+It will be passed along in the body same way as was specified.   
+  
+### Announce Body
 The body that is sent from the announcer is:  
 ```
 [
@@ -31,12 +45,14 @@ The body that is sent from the announcer is:
         "path": <full https endpoint>
       }
     ],
-    "name":"<service name> : <function name>",
+    "name": "<service name> : <function name>",
+    "identifier": <function name>,
     "events":[
       {<generated cloudformation event data>}
-    ]
+    ],
+    "contract": <your specified contract (if exists)>
   }  
 ]
 ```  
-### Kudos  
+## Kudos  
 Some methods are borrowed from the sourcecode of the [`serverless`](https://github.com/serverless/serverless) core plugins - super-duper-mega thanks  
