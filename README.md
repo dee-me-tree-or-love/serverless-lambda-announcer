@@ -17,14 +17,15 @@ plugins:
 ## Usage  
 ### Configuration
 In the `serverless.yml` specify a custom parameter for the announcer:  
-```
+```yaml
 custom:
-  - announcer:
-      # required:
-      hook: <your POST webhook>
-      # optional:
-      contract:   
-        /{function name}: <your contract> 
+  # can be specified as an array attribute too: - announcer:
+  announcer:
+    # required:
+    hook: <your POST webhook>
+    # optional:
+    contract:   
+      /{function name}: <your contract> 
 ```     
 **Hook**:  
 The `hook` must be an accessible `POST` url accepting json input.   
