@@ -15,7 +15,8 @@ plugins:
   ...
 ```  
 ## Usage  
-### Configuration
+This plugin announces only *full* deployments: fired on `sls deploy` only :v:  
+### Configuration  
 In the `serverless.yml` specify a custom parameter for the announcer:  
 ```yaml
 custom:
