@@ -1,6 +1,6 @@
 {
   "name": "serverless-lambda-announcer",
-  "version": "2.1.1",
+  "version": "2.1.2",
   "description": "A plugin for serverless framework that announces a deploy of a new function to a given url.",
   "main": "index.js",
   "scripts": {
