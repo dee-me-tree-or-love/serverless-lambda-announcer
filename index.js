@@ -94,8 +94,10 @@ class ServerlessPlugin {
    * @return {Object}
    */
   getAnnouncerConfiguration(service, sls) {
-    // service.custom is an array
-    const announcers = [service.custom.announcer] || service.custom
+    // service.custom can be an object or an array
+    const custom = service.custom;
+    const properties = custom.announcer ? [custom.announcer] : service.custom;
+    const announcers = properties
       // find the one settings defining the announcer
       .filter((s) => s.announcer)
       // map to only these settings to be on first level of depth
