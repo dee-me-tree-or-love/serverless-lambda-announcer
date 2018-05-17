@@ -10,6 +10,14 @@
     "type": "git",
     "url": "git+https://github.com/dee-me-tree-or-love/serverless-lambda-announcer.git"
   },
+  "keywords": [
+    "serverless",
+    "aws",
+    "lambda",
+    "hook",
+    "service-registration",
+    "plugin"
+  ],
   "author": "dmitrii",
   "license": "ISC",
   "bugs": {
