@@ -96,12 +96,14 @@ class ServerlessPlugin {
   getAnnouncerConfiguration(service, sls) {
     // service.custom can be an object or an array
     const custom = service.custom;
-    const properties = custom.announcer ? [custom.announcer] : service.custom;
-    const announcers = properties
-      // find the one settings defining the announcer
-      .filter((s) => s.announcer)
-      // map to only these settings to be on first level of depth
-      .map((s) => s.announcer);
+    let announcers = [];
+    if (Array.isArray(custom)) {
+      announcers = custom
+        .filter((s) => s.announcer)
+        .map((s) => s.announcer);
+    } else {
+      announcers = custom.announcer ? [custom.announcer] : [];
+    }
     if (announcers.length != 1) {
       sls.cli
         .consoleLog('!_Number of found announcer settings is not one..._!');
