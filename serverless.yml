@@ -1,0 +1,35 @@
+## mock configs for the serverless initialization
+service: announcer-test
+
+custom:
+  announcer:
+    hook: https://webhook.site/f2ddff94-1e1b-4503-b2d9-291ab944aac5
+    contract:
+      /announcer-test:
+        response:  
+          body: 
+            properties: 
+              beardLength: number
+              beardType: string
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  memorySize: 256 
+  timeout: 200
+  region: eu-central-1
+
+functions:
+  sharpness:
+    announcer-test: mock.handler.js
+    events: 
+      - http:
+          path: mock
+          method: put
+          cors: true
+
+package:
+  exclude:
+    - venv/**
+    - .vscode/**
+    - node_modules/**

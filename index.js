@@ -14,10 +14,22 @@ class ServerlessPlugin {
     this.service = this.serverless.service;
     this.provider = this.serverless.getProvider('aws');
     this.servicePath = this.serverless.config.servicePath || '';
-
     this.hooks = {
       'after:deploy:deploy': this.handle.bind(this),
     };
+    this.httpRequester = {};
+    // Set httpRequester object to be `request` by default
+    this.setRequestObject(request);
+  }
+
+  /**
+   * A setter function to set the requester object to be used for the
+   * http request - could be used and adjusted for different implementations
+   * like using `request` or `fetch` or any other package
+   * @param {Function | any} httpRequester
+   */
+  setRequestObject(httpRequester) {
+    this.httpRequester = httpRequester;
   }
 
   /**
@@ -75,7 +87,7 @@ class ServerlessPlugin {
       url: announcer.hook,
     };
     return new Promise((resolve, reject) => {
-      request(options, (err, res) => {
+      this.httpRequester(options, (err, res) => {
         if (err) {
           reject(new AnnouncerException('Failed to post an announcement'));
           return;
