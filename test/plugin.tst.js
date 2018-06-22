@@ -20,6 +20,7 @@ describe('ServerlessPlugin Testing', function() {
       sls = new Servereless();
       sls.init().then(() => {
         sls.setProvider('aws', new AwsProvider(sls));
+        sls.variables.populateService();
         _res(sls);
       });
     });
@@ -39,8 +40,7 @@ describe('ServerlessPlugin Testing', function() {
     assert.isFunction(slp.hooks[hookKey]);
   });
 
-  it('Loaded the custom configs from serverless.yml', () => {
-    console.log(sls.service.custom);
+  it('Loaded something for custom configs from serverless.yml', () => {
     assert.isNotEmpty(sls.service.custom);
   });
 

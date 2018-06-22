@@ -50,5 +50,5 @@ class Configs {
 const config = new Configs();
 
 module.exports = {
-  config,
+  configurations: () => config,
 };
