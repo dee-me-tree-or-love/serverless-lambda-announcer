@@ -25,10 +25,6 @@ describe('ServerlessPlugin Testing', function() {
     });
   });
 
-  it('Loaded the custom configs from serverless.yml', ()=>{
-    assert.isNotEmpty(sls.service.custom);
-  });
-
   it('Uses `request` package by default', () => {
     const slp = new ServerlessPlugin(sls, {});
     assert.property(slp, 'httpRequester');
@@ -41,6 +37,11 @@ describe('ServerlessPlugin Testing', function() {
     assert.property(slp, 'hooks');
     assert.property(slp.hooks, hookKey);
     assert.isFunction(slp.hooks[hookKey]);
+  });
+
+  it('Loaded the custom configs from serverless.yml', () => {
+    console.log(sls.service.custom);
+    assert.isNotEmpty(sls.service.custom);
   });
 
   /**

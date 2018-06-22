@@ -1,16 +1,7 @@
 ## mock configs for the serverless initialization
 service: announcer-test
 
-custom:
-  announcer:
-    hook: https://webhook.site/f2ddff94-1e1b-4503-b2d9-291ab944aac5
-    contract:
-      /announcer-test:
-        response:  
-          body: 
-            properties: 
-              beardLength: number
-              beardType: string
+custom: ${file(./test/customSlsConfig.js):custom}
 
 provider:
   name: aws
