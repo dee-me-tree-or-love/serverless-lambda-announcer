@@ -5,7 +5,7 @@
 
 service: announcer-test
 
-custom: ${file(./test/config.js)}
+custom: ${file(./test/mock/config.js)}
 
 provider:
   name: aws

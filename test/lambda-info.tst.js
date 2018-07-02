@@ -6,7 +6,7 @@ const assert = chai.assert;
 const Servereless = require('serverless/lib/Serverless');
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider');
 
-const {EnvironmentNotationManager} = require('./env-manager');
+const {EnvironmentNotationManager} = require('./mock/env-manager');
 const enm = new EnvironmentNotationManager();
 
 const LambdaInfo = require('../lib/lambda-info');

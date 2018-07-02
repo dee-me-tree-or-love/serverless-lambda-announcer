@@ -14,13 +14,13 @@ const ServerlessPlugin = require('../index');
  * Testing the plugin when the custom options are specified in array form:
  * ```yaml
  * custom:
- *  - announcer:
+ *  announcer:
  *    ...
  * ```
  */
 
 
-describe('ServerlessPlugin Testing - Array', function() {
+describe('ServerlessPlugin Testing - Object', function() {
   let sls;
 
   /**
@@ -30,8 +30,8 @@ describe('ServerlessPlugin Testing - Array', function() {
     return new Promise((_res) => {
       sls = new Servereless();
       sls.init().then(() => {
-        // Sets the sls custom array notation to be used
-        enm.setNotation('array');
+        // Sets the sls custom object notation to be used
+        enm.setNotation('object');
         sls.setProvider('aws', new AwsProvider(sls));
         sls.variables.populateService();
         _res(sls);
@@ -39,12 +39,13 @@ describe('ServerlessPlugin Testing - Array', function() {
     });
   });
 
-  it('Loaded custom options as an array from serverless.yml', () => {
+  it('Loaded custom options as an object from serverless.yml', () => {
     assert.isNotEmpty(sls.service.custom);
-    assert.isArray(sls.service.custom);
+    assert.isObject(sls.service.custom);
+    assert.isObject(sls.service.custom.announcer);
   });
 
-  it('Retreives the correct announcer configuration from array form', () => {
+  it('Retreives the correct announcer configuration from object form', () => {
     const slp = new ServerlessPlugin(sls, {});
     const announcerOptions = slp.getAnnouncerConfiguration(sls.service, sls);
     assert.isNotEmpty(announcerOptions);

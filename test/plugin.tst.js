@@ -2,6 +2,7 @@
 const chai = require('chai');
 const assert = chai.assert;
 
+const request = require('request');
 const Servereless = require('serverless/lib/Serverless');
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider');
 
@@ -11,16 +12,10 @@ const enm = new EnvironmentNotationManager();
 const ServerlessPlugin = require('../index');
 
 /**
- * Testing the plugin when the custom options are specified in array form:
- * ```yaml
- * custom:
- *  - announcer:
- *    ...
- * ```
+ * Testing the plugin initialization
  */
 
-
-describe('ServerlessPlugin Testing - Array', function() {
+describe('ServerlessPlugin Testing - Default Init', function() {
   let sls;
 
   /**
@@ -28,10 +23,10 @@ describe('ServerlessPlugin Testing - Array', function() {
    */
   before(() => {
     return new Promise((_res) => {
+      // Sets the sls custom default notation to be used
       sls = new Servereless();
       sls.init().then(() => {
-        // Sets the sls custom array notation to be used
-        enm.setNotation('array');
+        enm.setNotation('default');
         sls.setProvider('aws', new AwsProvider(sls));
         sls.variables.populateService();
         _res(sls);
@@ -41,14 +36,20 @@ describe('ServerlessPlugin Testing - Array', function() {
 
   it('Loaded custom options as an array from serverless.yml', () => {
     assert.isNotEmpty(sls.service.custom);
-    assert.isArray(sls.service.custom);
   });
 
-  it('Retreives the correct announcer configuration from array form', () => {
+
+  it('Uses `request` package by default', () => {
     const slp = new ServerlessPlugin(sls, {});
-    const announcerOptions = slp.getAnnouncerConfiguration(sls.service, sls);
-    assert.isNotEmpty(announcerOptions);
-    assert.isNotEmpty(announcerOptions.contract);
-    assert.isString(announcerOptions.hook);
+    assert.property(slp, 'httpRequester');
+    assert.deepEqual(slp.httpRequester, request);
+  });
+
+  it('A function is hooked to after:deploy:deploy', () => {
+    const hookKey = 'after:deploy:deploy';
+    const slp = new ServerlessPlugin(sls, {});
+    assert.property(slp, 'hooks');
+    assert.property(slp.hooks, hookKey);
+    assert.isFunction(slp.hooks[hookKey]);
   });
 });
