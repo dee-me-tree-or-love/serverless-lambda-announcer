@@ -24,9 +24,9 @@ class Configs {
       },
     };
 
-    this.customArray = [this.announcerConfigs];
-    this.customObject = {announcer: this.announcerConfigs.announcer};
-    this._customOptions = this.customObject;
+    this._customArray = [this.announcerConfigs];
+    this._customObject = {announcer: this.announcerConfigs.announcer};
+    this._customOptions = this._customObject;
   }
 
   /**
@@ -44,11 +44,32 @@ class Configs {
   get custom() {
     return this._customOptions;
   }
+
+  /**
+   * Retrieves the default setting for the configs
+   * By default it is set to the array representation
+   * @return {Array}
+   */
+  get default() {
+    return this.arrayNotation;
+  }
+
+  /**
+   * Returns the settings specified in an object
+   * @return {Object}
+   */
+  get objectNotation() {
+    return this._customObject;
+  }
+
+  /**
+   * Returns the settings specified in an array
+   * @return {Array}
+   */
+  get arrayNotation() {
+    return this._customArray;
+  }
 }
 
 
-const config = new Configs();
-
-module.exports = {
-  configurations: () => config,
-};
+module.exports = {Configs};

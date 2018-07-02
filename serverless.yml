@@ -1,7 +1,11 @@
-## mock configs for the serverless initialization
+##
+# mock configs for the serverless initialization
+# used for testing purposes
+##
+
 service: announcer-test
 
-custom: ${file(./test/customSlsConfig.js):configurations.custom}
+custom: ${file(./test/config.js)}
 
 provider:
   name: aws

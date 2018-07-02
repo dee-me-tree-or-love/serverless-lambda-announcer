@@ -6,6 +6,9 @@ const request = require('request');
 const Servereless = require('serverless/lib/Serverless');
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider');
 
+const {EnvironmentNotationManager} = require('./env-manager');
+const enm = new EnvironmentNotationManager();
+
 const ServerlessPlugin = require('../index');
 
 
@@ -17,8 +20,10 @@ describe('ServerlessPlugin Testing', function() {
    */
   before(() => {
     return new Promise((_res) => {
+      // set's the sls custom default notation to be used
       sls = new Servereless();
       sls.init().then(() => {
+        enm.setNotation('default');
         sls.setProvider('aws', new AwsProvider(sls));
         sls.variables.populateService();
         _res(sls);
@@ -40,14 +45,8 @@ describe('ServerlessPlugin Testing', function() {
     assert.isFunction(slp.hooks[hookKey]);
   });
 
-  it('Loaded something for custom configs from serverless.yml', () => {
+  it('Loaded default settings for custom configs from serverless.yml', () => {
     assert.isNotEmpty(sls.service.custom);
-  });
-
-  /**
-   * See README.md - Configuration
-   */
-  it('Resolves announcer configuration specified as Array', () => {
-
+    assert.isArray(sls.service.custom);
   });
 });
