@@ -5,10 +5,10 @@ class Configs {
   /**
    * Initializes the configuration holder object
    */
-  constructor() {
+  constructor({webhook = ''}) {
     this.announcerConfigs = {
       announcer: {
-        hook: 'https://webhook.site/f2ddff94-1e1b-4503-b2d9-291ab944aac5',
+        hook: webhook,
         contract: {
           announcer_test: {
             reponse: {

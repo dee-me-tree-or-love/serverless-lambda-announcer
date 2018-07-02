@@ -1,17 +1,17 @@
 const {Configs} = require('./configs');
-const {EnvironmentNotationManager} = require('./env-manager');
+const {EnvironmentManager} = require('./env-manager');
 
 
 const resolveExp = () => {
   /**
  * Get the notation from the process
  */
-  const enm = new EnvironmentNotationManager();
-  const notation = enm.getNotation();
+  const envMan = new EnvironmentManager();
+  const notation = envMan.getNotation();
   /**
  * Resolve respective configuration
  */
-  const configs = new Configs;
+  const configs = new Configs({webhook: envMan.resovleWebhook()});
   let exp = configs.default;
 
   switch (notation) {

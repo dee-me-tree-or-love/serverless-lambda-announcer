@@ -5,8 +5,8 @@ const assert = chai.assert;
 const Servereless = require('serverless/lib/Serverless');
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider');
 
-const {EnvironmentNotationManager} = require('./mock/env-manager');
-const enm = new EnvironmentNotationManager();
+const {EnvironmentManager} = require('./mock/env-manager');
+const envMan = new EnvironmentManager();
 
 const ServerlessPlugin = require('../index');
 
@@ -31,7 +31,7 @@ describe('ServerlessPlugin Testing - Object', function() {
       sls = new Servereless();
       sls.init().then(() => {
         // Sets the sls custom object notation to be used
-        enm.setNotation('object');
+        envMan.setNotation('object');
         sls.setProvider('aws', new AwsProvider(sls));
         sls.variables.populateService();
         _res(sls);
@@ -51,5 +51,13 @@ describe('ServerlessPlugin Testing - Object', function() {
     assert.isNotEmpty(announcerOptions);
     assert.isNotEmpty(announcerOptions.contract);
     assert.isString(announcerOptions.hook);
+  });
+
+  it('Retreives the correct announcer hook', () => {
+    const slp = new ServerlessPlugin(sls, {});
+    const hookObject = slp.resolveAnnouncerHook(sls.service, sls);
+    assert.isNotEmpty(hookObject);
+    const hook = hookObject.hook;
+    assert.equal(hook, envMan.resovleWebhook());
   });
 });

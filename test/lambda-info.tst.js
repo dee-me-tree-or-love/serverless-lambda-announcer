@@ -6,8 +6,8 @@ const assert = chai.assert;
 const Servereless = require('serverless/lib/Serverless');
 const AwsProvider = require('serverless/lib/plugins/aws/provider/awsProvider');
 
-const {EnvironmentNotationManager} = require('./mock/env-manager');
-const enm = new EnvironmentNotationManager();
+const {EnvironmentManager} = require('./mock/env-manager');
+const envMan = new EnvironmentManager();
 
 const LambdaInfo = require('../lib/lambda-info');
 
@@ -30,7 +30,7 @@ describe('Lambda Info Testing', function() {
       // set's the sls custom default notation to be used
       sls = new Servereless();
       sls.init().then(() => {
-        enm.setNotation('default');
+        envMan.setNotation('default');
         sls.setProvider('aws', new AwsProvider(sls));
         sls.variables.populateService();
         _res(sls);
