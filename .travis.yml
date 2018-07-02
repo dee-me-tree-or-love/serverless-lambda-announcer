@@ -1,1 +1,10 @@
 language: node_js
+# because of the non-global installation of sls
+# https://github.com/serverless/serverless/issues/3792
+# install: 
+#   - npm i --legacy-bundling
+before_install:
+  - npm i serverless -g
+cache:
+  directories:
+    - "node_modules"
