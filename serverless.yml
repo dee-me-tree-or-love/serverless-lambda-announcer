@@ -15,11 +15,18 @@ provider:
   region: eu-central-1
 
 functions:
-  sharpness:
-    announcer-test: mock.handler.js
+  announcer-test:
+    handler: test/mock/handler.yo
     events: 
       - http:
           path: mock
+          method: put
+          cors: true
+  dido:
+    handler: test/mock/handler.yo
+    events: 
+      - http:
+          path: mock/dido
           method: put
           cors: true
 
