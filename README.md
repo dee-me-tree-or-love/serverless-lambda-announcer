@@ -1,5 +1,5 @@
 # serverless-lambda-announcer :speech_balloon: 
-A plugin for serverless framework that announces a deploy of a new function to a given url. 
+A plugin for serverless framework that announces a deploy of a new function to a given url.  
 [![Build Status](https://travis-ci.org/dee-me-tree-or-love/serverless-lambda-announcer.svg?branch=master)](https://travis-ci.org/dee-me-tree-or-love/serverless-lambda-announcer)  
 
 ## Purpose  
