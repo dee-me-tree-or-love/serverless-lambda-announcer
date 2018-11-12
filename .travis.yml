@@ -8,8 +8,8 @@ node_js:
 # install: 
 #   - npm i --legacy-bundling
 
-before_install:
-  - npm i serverless -g
+# before_install:
+#   - npm i serverless -g
 
 cache:
   directories:
