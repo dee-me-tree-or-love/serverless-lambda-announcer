@@ -13,4 +13,3 @@ deploy:
     secure: $NPM_API_KEY_SECURE
   on:
     branch: master
-  
