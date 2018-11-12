@@ -7,7 +7,6 @@ cache:
   - node_modules
 deploy:
   provider: npm
-  tag: next
   on:
     branch: master
   api_key:
