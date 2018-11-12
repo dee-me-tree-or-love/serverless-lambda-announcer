@@ -1,16 +1,15 @@
 language: node_js
 node_js:
-  - "node"
-  - "10"
-
-# because of the non-global installation of sls
-# https://github.com/serverless/serverless/issues/3792
-# install: 
-#   - npm i --legacy-bundling
-
-# before_install:
-#   - npm i serverless -g
-
+- node
+- '10'
 cache:
   directories:
-    - "node_modules"
+  - node_modules
+deploy:
+  provider: npm
+  email: $NPM_EMAIL
+  api_key:
+    secure: $NPM_API_KEY_SECURE
+  on:
+    branch: master
+  
